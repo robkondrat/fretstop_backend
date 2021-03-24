@@ -147,7 +147,7 @@ input UsersCreateInput {
 }
 
 """ A keystone list """
-type Product {
+type Guitar {
   id: ID!
   name: String
   description: String
@@ -155,9 +155,9 @@ type Product {
   price: Int
 }
 
-input ProductWhereInput {
-  AND: [ProductWhereInput]
-  OR: [ProductWhereInput]
+input GuitarWhereInput {
+  AND: [GuitarWhereInput]
+  OR: [GuitarWhereInput]
   id: ID
   id_not: ID
   id_in: [ID]
@@ -226,11 +226,11 @@ input ProductWhereInput {
   price_not_in: [Int]
 }
 
-input ProductWhereUniqueInput {
+input GuitarWhereUniqueInput {
   id: ID!
 }
 
-enum SortProductsBy {
+enum SortGuitarsBy {
   id_ASC
   id_DESC
   name_ASC
@@ -243,27 +243,144 @@ enum SortProductsBy {
   price_DESC
 }
 
-input ProductUpdateInput {
+input GuitarUpdateInput {
   name: String
   description: String
   status: String
   price: Int
 }
 
-input ProductsUpdateInput {
+input GuitarsUpdateInput {
   id: ID!
-  data: ProductUpdateInput
+  data: GuitarUpdateInput
 }
 
-input ProductCreateInput {
+input GuitarCreateInput {
   name: String
   description: String
   status: String
   price: Int
 }
 
-input ProductsCreateInput {
-  data: ProductCreateInput
+input GuitarsCreateInput {
+  data: GuitarCreateInput
+}
+
+type CloudinaryImage_File {
+  id: ID
+  path: String
+  filename: String
+  originalFilename: String
+  mimetype: String
+  encoding: String
+  publicUrl: String
+  publicUrlTransformed(transformation: CloudinaryImageFormat): String
+}
+
+"""
+Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
+All options are strings as they ultimately end up in a URL.
+"""
+input CloudinaryImageFormat {
+  """ Rewrites the filename to be this pretty string. Do not include `/` or `.` 
+  """
+  prettyName: String
+  width: String
+  height: String
+  crop: String
+  aspect_ratio: String
+  gravity: String
+  zoom: String
+  x: String
+  y: String
+  format: String
+  fetch_format: String
+  quality: String
+  radius: String
+  angle: String
+  effect: String
+  opacity: String
+  border: String
+  background: String
+  overlay: String
+  underlay: String
+  default_image: String
+  delay: String
+  color: String
+  color_space: String
+  dpr: String
+  page: String
+  density: String
+  flags: String
+  transformation: String
+}
+
+""" A keystone list """
+type GuitarImage {
+  id: ID!
+  image: CloudinaryImage_File
+  altText: String
+}
+
+input GuitarImageWhereInput {
+  AND: [GuitarImageWhereInput]
+  OR: [GuitarImageWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  image: String
+  image_not: String
+  image_in: [String]
+  image_not_in: [String]
+  altText: String
+  altText_not: String
+  altText_contains: String
+  altText_not_contains: String
+  altText_starts_with: String
+  altText_not_starts_with: String
+  altText_ends_with: String
+  altText_not_ends_with: String
+  altText_i: String
+  altText_not_i: String
+  altText_contains_i: String
+  altText_not_contains_i: String
+  altText_starts_with_i: String
+  altText_not_starts_with_i: String
+  altText_ends_with_i: String
+  altText_not_ends_with_i: String
+  altText_in: [String]
+  altText_not_in: [String]
+}
+
+input GuitarImageWhereUniqueInput {
+  id: ID!
+}
+
+enum SortGuitarImagesBy {
+  id_ASC
+  id_DESC
+  altText_ASC
+  altText_DESC
+}
+
+input GuitarImageUpdateInput {
+  image: Upload
+  altText: String
+}
+
+input GuitarImagesUpdateInput {
+  id: ID!
+  data: GuitarImageUpdateInput
+}
+
+input GuitarImageCreateInput {
+  image: Upload
+  altText: String
+}
+
+input GuitarImagesCreateInput {
+  data: GuitarImageCreateInput
 }
 
 """
@@ -459,18 +576,31 @@ type Query {
   """ Retrieve the meta-data for the User list. """
   _UsersMeta: _ListMeta
 
-  """ Search for all Product items which match the where clause. """
-  allProducts(where: ProductWhereInput, search: String, sortBy: [SortProductsBy!], orderBy: String, first: Int, skip: Int): [Product]
+  """ Search for all Guitar items which match the where clause. """
+  allGuitars(where: GuitarWhereInput, search: String, sortBy: [SortGuitarsBy!], orderBy: String, first: Int, skip: Int): [Guitar]
 
-  """ Search for the Product item with the matching ID. """
-  Product(where: ProductWhereUniqueInput!): Product
+  """ Search for the Guitar item with the matching ID. """
+  Guitar(where: GuitarWhereUniqueInput!): Guitar
 
-  """ Perform a meta-query on all Product items which match the where clause. 
+  """ Perform a meta-query on all Guitar items which match the where clause. 
   """
-  _allProductsMeta(where: ProductWhereInput, search: String, sortBy: [SortProductsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+  _allGuitarsMeta(where: GuitarWhereInput, search: String, sortBy: [SortGuitarsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
 
-  """ Retrieve the meta-data for the Product list. """
-  _ProductsMeta: _ListMeta
+  """ Retrieve the meta-data for the Guitar list. """
+  _GuitarsMeta: _ListMeta
+
+  """ Search for all GuitarImage items which match the where clause. """
+  allGuitarImages(where: GuitarImageWhereInput, search: String, sortBy: [SortGuitarImagesBy!], orderBy: String, first: Int, skip: Int): [GuitarImage]
+
+  """ Search for the GuitarImage item with the matching ID. """
+  GuitarImage(where: GuitarImageWhereUniqueInput!): GuitarImage
+
+  """ Perform a meta-query on all GuitarImage items which match the where clause. 
+  """
+  _allGuitarImagesMeta(where: GuitarImageWhereInput, search: String, sortBy: [SortGuitarImagesBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+
+  """ Retrieve the meta-data for the GuitarImage list. """
+  _GuitarImagesMeta: _ListMeta
 
   """ Retrieve the meta-data for all lists. """
   _ksListsMeta(where: _ksListsMetaInput): [_ListMeta]
@@ -500,23 +630,41 @@ type Mutation {
   """ Delete multiple User items by ID. """
   deleteUsers(ids: [ID!]): [User]
 
-  """ Create a single Product item. """
-  createProduct(data: ProductCreateInput): Product
+  """ Create a single Guitar item. """
+  createGuitar(data: GuitarCreateInput): Guitar
 
-  """ Create multiple Product items. """
-  createProducts(data: [ProductsCreateInput]): [Product]
+  """ Create multiple Guitar items. """
+  createGuitars(data: [GuitarsCreateInput]): [Guitar]
 
-  """ Update a single Product item by ID. """
-  updateProduct(id: ID!, data: ProductUpdateInput): Product
+  """ Update a single Guitar item by ID. """
+  updateGuitar(id: ID!, data: GuitarUpdateInput): Guitar
 
-  """ Update multiple Product items by ID. """
-  updateProducts(data: [ProductsUpdateInput]): [Product]
+  """ Update multiple Guitar items by ID. """
+  updateGuitars(data: [GuitarsUpdateInput]): [Guitar]
 
-  """ Delete a single Product item by ID. """
-  deleteProduct(id: ID!): Product
+  """ Delete a single Guitar item by ID. """
+  deleteGuitar(id: ID!): Guitar
 
-  """ Delete multiple Product items by ID. """
-  deleteProducts(ids: [ID!]): [Product]
+  """ Delete multiple Guitar items by ID. """
+  deleteGuitars(ids: [ID!]): [Guitar]
+
+  """ Create a single GuitarImage item. """
+  createGuitarImage(data: GuitarImageCreateInput): GuitarImage
+
+  """ Create multiple GuitarImage items. """
+  createGuitarImages(data: [GuitarImagesCreateInput]): [GuitarImage]
+
+  """ Update a single GuitarImage item by ID. """
+  updateGuitarImage(id: ID!, data: GuitarImageUpdateInput): GuitarImage
+
+  """ Update multiple GuitarImage items by ID. """
+  updateGuitarImages(data: [GuitarImagesUpdateInput]): [GuitarImage]
+
+  """ Delete a single GuitarImage item by ID. """
+  deleteGuitarImage(id: ID!): GuitarImage
+
+  """ Delete multiple GuitarImage items by ID. """
+  deleteGuitarImages(ids: [ID!]): [GuitarImage]
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult!
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
   endSession: Boolean!

@@ -156,9 +156,9 @@ export type UsersCreateInput = {
   readonly data?: UserCreateInput | null;
 };
 
-export type ProductWhereInput = {
-  readonly AND?: ReadonlyArray<ProductWhereInput | null> | null;
-  readonly OR?: ReadonlyArray<ProductWhereInput | null> | null;
+export type GuitarWhereInput = {
+  readonly AND?: ReadonlyArray<GuitarWhereInput | null> | null;
+  readonly OR?: ReadonlyArray<GuitarWhereInput | null> | null;
   readonly id?: Scalars['ID'] | null;
   readonly id_not?: Scalars['ID'] | null;
   readonly id_in?: ReadonlyArray<Scalars['ID'] | null> | null;
@@ -227,11 +227,11 @@ export type ProductWhereInput = {
   readonly price_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
 };
 
-export type ProductWhereUniqueInput = {
+export type GuitarWhereUniqueInput = {
   readonly id: Scalars['ID'];
 };
 
-export type SortProductsBy =
+export type SortGuitarsBy =
   | 'id_ASC'
   | 'id_DESC'
   | 'name_ASC'
@@ -243,27 +243,119 @@ export type SortProductsBy =
   | 'price_ASC'
   | 'price_DESC';
 
-export type ProductUpdateInput = {
+export type GuitarUpdateInput = {
   readonly name?: Scalars['String'] | null;
   readonly description?: Scalars['String'] | null;
   readonly status?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
 };
 
-export type ProductsUpdateInput = {
+export type GuitarsUpdateInput = {
   readonly id: Scalars['ID'];
-  readonly data?: ProductUpdateInput | null;
+  readonly data?: GuitarUpdateInput | null;
 };
 
-export type ProductCreateInput = {
+export type GuitarCreateInput = {
   readonly name?: Scalars['String'] | null;
   readonly description?: Scalars['String'] | null;
   readonly status?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
 };
 
-export type ProductsCreateInput = {
-  readonly data?: ProductCreateInput | null;
+export type GuitarsCreateInput = {
+  readonly data?: GuitarCreateInput | null;
+};
+
+export type CloudinaryImageFormat = {
+  readonly prettyName?: Scalars['String'] | null;
+  readonly width?: Scalars['String'] | null;
+  readonly height?: Scalars['String'] | null;
+  readonly crop?: Scalars['String'] | null;
+  readonly aspect_ratio?: Scalars['String'] | null;
+  readonly gravity?: Scalars['String'] | null;
+  readonly zoom?: Scalars['String'] | null;
+  readonly x?: Scalars['String'] | null;
+  readonly y?: Scalars['String'] | null;
+  readonly format?: Scalars['String'] | null;
+  readonly fetch_format?: Scalars['String'] | null;
+  readonly quality?: Scalars['String'] | null;
+  readonly radius?: Scalars['String'] | null;
+  readonly angle?: Scalars['String'] | null;
+  readonly effect?: Scalars['String'] | null;
+  readonly opacity?: Scalars['String'] | null;
+  readonly border?: Scalars['String'] | null;
+  readonly background?: Scalars['String'] | null;
+  readonly overlay?: Scalars['String'] | null;
+  readonly underlay?: Scalars['String'] | null;
+  readonly default_image?: Scalars['String'] | null;
+  readonly delay?: Scalars['String'] | null;
+  readonly color?: Scalars['String'] | null;
+  readonly color_space?: Scalars['String'] | null;
+  readonly dpr?: Scalars['String'] | null;
+  readonly page?: Scalars['String'] | null;
+  readonly density?: Scalars['String'] | null;
+  readonly flags?: Scalars['String'] | null;
+  readonly transformation?: Scalars['String'] | null;
+};
+
+export type GuitarImageWhereInput = {
+  readonly AND?: ReadonlyArray<GuitarImageWhereInput | null> | null;
+  readonly OR?: ReadonlyArray<GuitarImageWhereInput | null> | null;
+  readonly id?: Scalars['ID'] | null;
+  readonly id_not?: Scalars['ID'] | null;
+  readonly id_in?: ReadonlyArray<Scalars['ID'] | null> | null;
+  readonly id_not_in?: ReadonlyArray<Scalars['ID'] | null> | null;
+  readonly image?: Scalars['String'] | null;
+  readonly image_not?: Scalars['String'] | null;
+  readonly image_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly image_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly altText?: Scalars['String'] | null;
+  readonly altText_not?: Scalars['String'] | null;
+  readonly altText_contains?: Scalars['String'] | null;
+  readonly altText_not_contains?: Scalars['String'] | null;
+  readonly altText_starts_with?: Scalars['String'] | null;
+  readonly altText_not_starts_with?: Scalars['String'] | null;
+  readonly altText_ends_with?: Scalars['String'] | null;
+  readonly altText_not_ends_with?: Scalars['String'] | null;
+  readonly altText_i?: Scalars['String'] | null;
+  readonly altText_not_i?: Scalars['String'] | null;
+  readonly altText_contains_i?: Scalars['String'] | null;
+  readonly altText_not_contains_i?: Scalars['String'] | null;
+  readonly altText_starts_with_i?: Scalars['String'] | null;
+  readonly altText_not_starts_with_i?: Scalars['String'] | null;
+  readonly altText_ends_with_i?: Scalars['String'] | null;
+  readonly altText_not_ends_with_i?: Scalars['String'] | null;
+  readonly altText_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly altText_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+};
+
+export type GuitarImageWhereUniqueInput = {
+  readonly id: Scalars['ID'];
+};
+
+export type SortGuitarImagesBy =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'altText_ASC'
+  | 'altText_DESC';
+
+export type GuitarImageUpdateInput = {
+  readonly image?: any | null;
+  readonly altText?: Scalars['String'] | null;
+};
+
+export type GuitarImagesUpdateInput = {
+  readonly id: Scalars['ID'];
+  readonly data?: GuitarImageUpdateInput | null;
+};
+
+export type GuitarImageCreateInput = {
+  readonly image?: any | null;
+  readonly altText?: Scalars['String'] | null;
+};
+
+export type GuitarImagesCreateInput = {
+  readonly data?: GuitarImageCreateInput | null;
 };
 
 export type _ksListsMetaInput = {
@@ -349,8 +441,8 @@ export type UserListFn = (
   UserListTypeInfo['fields']
 >;
 
-export type ProductListTypeInfo = {
-  key: 'Product';
+export type GuitarListTypeInfo = {
+  key: 'Guitar';
   fields: 'id' | 'name' | 'description' | 'status' | 'price';
   backing: {
     readonly id: string;
@@ -360,31 +452,65 @@ export type ProductListTypeInfo = {
     readonly price?: number | null;
   };
   inputs: {
-    where: ProductWhereInput;
-    create: ProductCreateInput;
-    update: ProductUpdateInput;
+    where: GuitarWhereInput;
+    create: GuitarCreateInput;
+    update: GuitarUpdateInput;
   };
   args: {
     listQuery: {
-      readonly where?: ProductWhereInput | null;
-      readonly sortBy?: ReadonlyArray<SortProductsBy> | null;
+      readonly where?: GuitarWhereInput | null;
+      readonly sortBy?: ReadonlyArray<SortGuitarsBy> | null;
       readonly first?: Scalars['Int'] | null;
       readonly skip?: Scalars['Int'] | null;
     };
   };
 };
 
-export type ProductListFn = (
+export type GuitarListFn = (
   listConfig: import('@keystone-next/keystone/schema').ListConfig<
-    ProductListTypeInfo,
-    ProductListTypeInfo['fields']
+    GuitarListTypeInfo,
+    GuitarListTypeInfo['fields']
   >
 ) => import('@keystone-next/keystone/schema').ListConfig<
-  ProductListTypeInfo,
-  ProductListTypeInfo['fields']
+  GuitarListTypeInfo,
+  GuitarListTypeInfo['fields']
+>;
+
+export type GuitarImageListTypeInfo = {
+  key: 'GuitarImage';
+  fields: 'id' | 'image' | 'altText';
+  backing: {
+    readonly id: string;
+    readonly image?: any;
+    readonly altText?: string | null;
+  };
+  inputs: {
+    where: GuitarImageWhereInput;
+    create: GuitarImageCreateInput;
+    update: GuitarImageUpdateInput;
+  };
+  args: {
+    listQuery: {
+      readonly where?: GuitarImageWhereInput | null;
+      readonly sortBy?: ReadonlyArray<SortGuitarImagesBy> | null;
+      readonly first?: Scalars['Int'] | null;
+      readonly skip?: Scalars['Int'] | null;
+    };
+  };
+};
+
+export type GuitarImageListFn = (
+  listConfig: import('@keystone-next/keystone/schema').ListConfig<
+    GuitarImageListTypeInfo,
+    GuitarImageListTypeInfo['fields']
+  >
+) => import('@keystone-next/keystone/schema').ListConfig<
+  GuitarImageListTypeInfo,
+  GuitarImageListTypeInfo['fields']
 >;
 
 export type KeystoneListsTypeInfo = {
   readonly User: UserListTypeInfo;
-  readonly Product: ProductListTypeInfo;
+  readonly Guitar: GuitarListTypeInfo;
+  readonly GuitarImage: GuitarImageListTypeInfo;
 };

@@ -24,7 +24,10 @@ export default function Home() {
           User: _allUsersMeta {
             count
           }
-          Product: _allProductsMeta {
+          Guitar: _allGuitarsMeta {
+            count
+          }
+          GuitarImage: _allGuitarImagesMeta {
             count
           }
         }

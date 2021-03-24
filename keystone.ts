@@ -6,7 +6,8 @@ import {
   statelessSessions,
 } from "@keystone-next/keystone/session";
 import { User } from "./schemas/User";
-import { Product } from "./schemas/Product";
+import { Guitar } from "./schemas/Guitar";
+import { GuitarImage } from "./schemas/GuitarImage";
 
 const databaseURL = process.env.DATABASE_URL;
 
@@ -42,7 +43,8 @@ export default withAuth(
     lists: createSchema({
       // Schema items go in here
       User,
-      Product,
+      Guitar,
+      GuitarImage,
     }),
     ui: {
       // show the ui only for people who pass this test
