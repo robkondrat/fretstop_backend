@@ -34,4 +34,9 @@ export const Guitar = list({
     price: integer(),
     // TODO photo
   },
+  ui: {
+    listView: {
+      initialColumns: ['name', 'status', 'description', 'price']
+    }
+  }
 });
