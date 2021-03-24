@@ -156,6 +156,13 @@ export type UsersCreateInput = {
   readonly data?: UserCreateInput | null;
 };
 
+export type GuitarImageRelateToOneInput = {
+  readonly create?: GuitarImageCreateInput | null;
+  readonly connect?: GuitarImageWhereUniqueInput | null;
+  readonly disconnect?: GuitarImageWhereUniqueInput | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
 export type GuitarWhereInput = {
   readonly AND?: ReadonlyArray<GuitarWhereInput | null> | null;
   readonly OR?: ReadonlyArray<GuitarWhereInput | null> | null;
@@ -199,6 +206,8 @@ export type GuitarWhereInput = {
   readonly description_not_ends_with_i?: Scalars['String'] | null;
   readonly description_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly description_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly photo?: GuitarImageWhereInput | null;
+  readonly photo_is_null?: Scalars['Boolean'] | null;
   readonly status?: Scalars['String'] | null;
   readonly status_not?: Scalars['String'] | null;
   readonly status_contains?: Scalars['String'] | null;
@@ -238,6 +247,8 @@ export type SortGuitarsBy =
   | 'name_DESC'
   | 'description_ASC'
   | 'description_DESC'
+  | 'photo_ASC'
+  | 'photo_DESC'
   | 'status_ASC'
   | 'status_DESC'
   | 'price_ASC'
@@ -246,6 +257,7 @@ export type SortGuitarsBy =
 export type GuitarUpdateInput = {
   readonly name?: Scalars['String'] | null;
   readonly description?: Scalars['String'] | null;
+  readonly photo?: GuitarImageRelateToOneInput | null;
   readonly status?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
 };
@@ -258,6 +270,7 @@ export type GuitarsUpdateInput = {
 export type GuitarCreateInput = {
   readonly name?: Scalars['String'] | null;
   readonly description?: Scalars['String'] | null;
+  readonly photo?: GuitarImageRelateToOneInput | null;
   readonly status?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
 };
@@ -298,6 +311,13 @@ export type CloudinaryImageFormat = {
   readonly transformation?: Scalars['String'] | null;
 };
 
+export type GuitarRelateToOneInput = {
+  readonly create?: GuitarCreateInput | null;
+  readonly connect?: GuitarWhereUniqueInput | null;
+  readonly disconnect?: GuitarWhereUniqueInput | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
 export type GuitarImageWhereInput = {
   readonly AND?: ReadonlyArray<GuitarImageWhereInput | null> | null;
   readonly OR?: ReadonlyArray<GuitarImageWhereInput | null> | null;
@@ -327,6 +347,8 @@ export type GuitarImageWhereInput = {
   readonly altText_not_ends_with_i?: Scalars['String'] | null;
   readonly altText_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly altText_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly guitar?: GuitarWhereInput | null;
+  readonly guitar_is_null?: Scalars['Boolean'] | null;
 };
 
 export type GuitarImageWhereUniqueInput = {
@@ -337,11 +359,14 @@ export type SortGuitarImagesBy =
   | 'id_ASC'
   | 'id_DESC'
   | 'altText_ASC'
-  | 'altText_DESC';
+  | 'altText_DESC'
+  | 'guitar_ASC'
+  | 'guitar_DESC';
 
 export type GuitarImageUpdateInput = {
   readonly image?: any | null;
   readonly altText?: Scalars['String'] | null;
+  readonly guitar?: GuitarRelateToOneInput | null;
 };
 
 export type GuitarImagesUpdateInput = {
@@ -352,6 +377,7 @@ export type GuitarImagesUpdateInput = {
 export type GuitarImageCreateInput = {
   readonly image?: any | null;
   readonly altText?: Scalars['String'] | null;
+  readonly guitar?: GuitarRelateToOneInput | null;
 };
 
 export type GuitarImagesCreateInput = {
@@ -443,11 +469,12 @@ export type UserListFn = (
 
 export type GuitarListTypeInfo = {
   key: 'Guitar';
-  fields: 'id' | 'name' | 'description' | 'status' | 'price';
+  fields: 'id' | 'name' | 'description' | 'photo' | 'status' | 'price';
   backing: {
     readonly id: string;
     readonly name?: string | null;
     readonly description?: string | null;
+    readonly photo?: string | null;
     readonly status?: string | null;
     readonly price?: number | null;
   };
@@ -478,11 +505,12 @@ export type GuitarListFn = (
 
 export type GuitarImageListTypeInfo = {
   key: 'GuitarImage';
-  fields: 'id' | 'image' | 'altText';
+  fields: 'id' | 'image' | 'altText' | 'guitar';
   backing: {
     readonly id: string;
     readonly image?: any;
     readonly altText?: string | null;
+    readonly guitar?: string | null;
   };
   inputs: {
     where: GuitarImageWhereInput;

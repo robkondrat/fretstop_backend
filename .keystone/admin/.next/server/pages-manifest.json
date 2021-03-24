@@ -2,10 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/": "pages/index.js",
-  "/guitars": "pages/guitars.js",
   "/guitars/[id]": "pages/guitars/[id].js",
-  "/guitar-images": "pages/guitar-images.js",
-  "/guitar-images/[id]": "pages/guitar-images/[id].js"
+  "/guitars": "pages/guitars.js"
 }

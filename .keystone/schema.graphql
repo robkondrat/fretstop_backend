@@ -146,11 +146,19 @@ input UsersCreateInput {
   data: UserCreateInput
 }
 
+input GuitarImageRelateToOneInput {
+  create: GuitarImageCreateInput
+  connect: GuitarImageWhereUniqueInput
+  disconnect: GuitarImageWhereUniqueInput
+  disconnectAll: Boolean
+}
+
 """ A keystone list """
 type Guitar {
   id: ID!
   name: String
   description: String
+  photo: GuitarImage
   status: String
   price: Int
 }
@@ -198,6 +206,8 @@ input GuitarWhereInput {
   description_not_ends_with_i: String
   description_in: [String]
   description_not_in: [String]
+  photo: GuitarImageWhereInput
+  photo_is_null: Boolean
   status: String
   status_not: String
   status_contains: String
@@ -237,6 +247,8 @@ enum SortGuitarsBy {
   name_DESC
   description_ASC
   description_DESC
+  photo_ASC
+  photo_DESC
   status_ASC
   status_DESC
   price_ASC
@@ -246,6 +258,7 @@ enum SortGuitarsBy {
 input GuitarUpdateInput {
   name: String
   description: String
+  photo: GuitarImageRelateToOneInput
   status: String
   price: Int
 }
@@ -258,6 +271,7 @@ input GuitarsUpdateInput {
 input GuitarCreateInput {
   name: String
   description: String
+  photo: GuitarImageRelateToOneInput
   status: String
   price: Int
 }
@@ -315,11 +329,19 @@ input CloudinaryImageFormat {
   transformation: String
 }
 
+input GuitarRelateToOneInput {
+  create: GuitarCreateInput
+  connect: GuitarWhereUniqueInput
+  disconnect: GuitarWhereUniqueInput
+  disconnectAll: Boolean
+}
+
 """ A keystone list """
 type GuitarImage {
   id: ID!
   image: CloudinaryImage_File
   altText: String
+  guitar: Guitar
 }
 
 input GuitarImageWhereInput {
@@ -351,6 +373,8 @@ input GuitarImageWhereInput {
   altText_not_ends_with_i: String
   altText_in: [String]
   altText_not_in: [String]
+  guitar: GuitarWhereInput
+  guitar_is_null: Boolean
 }
 
 input GuitarImageWhereUniqueInput {
@@ -362,11 +386,14 @@ enum SortGuitarImagesBy {
   id_DESC
   altText_ASC
   altText_DESC
+  guitar_ASC
+  guitar_DESC
 }
 
 input GuitarImageUpdateInput {
   image: Upload
   altText: String
+  guitar: GuitarRelateToOneInput
 }
 
 input GuitarImagesUpdateInput {
@@ -377,6 +404,7 @@ input GuitarImagesUpdateInput {
 input GuitarImageCreateInput {
   image: Upload
   altText: String
+  guitar: GuitarRelateToOneInput
 }
 
 input GuitarImagesCreateInput {
