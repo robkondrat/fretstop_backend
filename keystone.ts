@@ -8,6 +8,7 @@ import {
 import { User } from "./schemas/User";
 import { Guitar } from "./schemas/Guitar";
 import { GuitarImage } from "./schemas/GuitarImage";
+import { CartItem } from "./schemas/CartItem";
 import { insertSeedData } from "./seed-data";
 import { sendPasswordResetEmail } from "./lib/mail";
 
@@ -57,6 +58,7 @@ export default withAuth(
       User,
       Guitar,
       GuitarImage,
+      CartItem,
     }),
     ui: {
       // show the ui only for people who pass this test

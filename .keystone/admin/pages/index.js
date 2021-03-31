@@ -30,6 +30,9 @@ export default function Home() {
           GuitarImage: _allGuitarImagesMeta {
             count
           }
+          CartItem: _allCartItemsMeta {
+            count
+          }
         }
       `}
     />
