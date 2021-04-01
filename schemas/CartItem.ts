@@ -5,7 +5,7 @@ export const CartItem = list({
   // TODO: access
   ui: {
     listView: {
-      initialColumns: ["user", "guitar", "quantity"],
+      initialColumns: ["guitar", "quantity", "user"],
     },
   },
   fields: {
