@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/cart-items": "pages/cart-items.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/guitars/[id]": "pages/guitars/[id].js",
-  "/guitars": "pages/guitars.js"
+  "/cart-items": "pages/cart-items.js"
 }
