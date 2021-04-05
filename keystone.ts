@@ -9,6 +9,9 @@ import { User } from "./schemas/User";
 import { Guitar } from "./schemas/Guitar";
 import { GuitarImage } from "./schemas/GuitarImage";
 import { CartItem } from "./schemas/CartItem";
+import { OrderItem } from "./schemas/OrderItem";
+import { Order } from "./schemas/Order";
+
 import { insertSeedData } from "./seed-data";
 import { sendPasswordResetEmail } from "./lib/mail";
 import { extendGraphqlSchema } from "./mutations";
@@ -30,9 +33,9 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     async sendToken(args) {
-      await sendPasswordResetEmail(args.token, args.identity)
-    }
-  }
+      await sendPasswordResetEmail(args.token, args.identity);
+    },
+  },
 });
 
 export default withAuth(
@@ -48,8 +51,8 @@ export default withAuth(
       adapter: "mongoose",
       url: databaseURL,
       async onConnect(keystone) {
-        console.log('connect to the database');
-        if (process.argv.includes('--seed-data')) {
+        console.log("connect to the database");
+        if (process.argv.includes("--seed-data")) {
           await insertSeedData(keystone);
         }
       },
@@ -60,6 +63,8 @@ export default withAuth(
       Guitar,
       GuitarImage,
       CartItem,
+      OrderItem,
+      Order,
     }),
     extendGraphqlSchema: extendGraphqlSchema,
     ui: {
