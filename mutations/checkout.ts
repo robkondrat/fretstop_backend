@@ -55,20 +55,48 @@ export default async function checkout(
     tally: number,
     cartItem: CartItemCreateInput
   ) {
-    return tally + cartItem.quantity + cartItem.guitar.price;
+    return tally + cartItem.quantity * cartItem.guitar.price;
   },
   0);
   console.log(amount);
   // 3. create the charge with thei stripe library
-  const charge = await stripeConfig.paymentIntents.create({
-    amount,
-    currency: "USD",
-    confirm: true,
-    payment_method: token,
-  }).catch(err => {
-    console.log(err);
-    throw new Error(err.message);
-  });
+  const charge = await stripeConfig.paymentIntents
+    .create({
+      amount,
+      currency: "USD",
+      confirm: true,
+      payment_method: token,
+    })
+    .catch((err) => {
+      console.log(err);
+      throw new Error(err.message);
+    });
+
+  console.log(charge);
   // 4. convert the cartitems to orderitems
+  const orderItems = cartItems.map((cartItem) => {
+    const orderItem = {
+      name: cartItem.guitar.name,
+      description: cartItem.guitar.description,
+      price: cartItem.guitar.price,
+      quantity: cartItem.guitar.quantity,
+      photo: { connect: { id: cartItem.guitar.photo.id } },
+    };
+    return orderItem;
+  });
   // 5. create the order and return it
+  const order = await context.lists.Order.createOne({
+    data: {
+      total: charge.amount,
+      charge: charge.id,
+      items: { create: orderItems },
+      user: { connect: { id: userId } },
+    },
+  });
+  // 6. clean up any old cart items
+  const cartItemIds = cartItems.map(cartItem => cartItem.id);
+  await context.lists.CartItem.deleteMany({
+    ids: cartItemIds
+  });
+  return order;
 }
