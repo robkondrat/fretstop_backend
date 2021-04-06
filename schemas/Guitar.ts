@@ -1,13 +1,13 @@
 import { integer, relationship, select, text } from "@keystone-next/fields";
 import { list } from "@keystone-next/keystone/schema";
-import { isSignedIn } from "../access";
+import { isSignedIn, rules } from "../access";
 
 export const Guitar = list({
   access: {
     create: isSignedIn,
-    read: isSignedIn,
-    update: isSignedIn,
-    delete: isSignedIn,
+    read: rules.canReadGuitars,
+    update: rules.canManageGuitars,
+    delete: rules.canManageGuitars,
   },
   fields: {
     name: text({ isRequired: true }),
@@ -17,13 +17,13 @@ export const Guitar = list({
       },
     }),
     photo: relationship({
-      ref: 'GuitarImage.guitar',
+      ref: "GuitarImage.guitar",
       ui: {
-        displayMode: 'cards',
-        cardFields: ['image', 'altText'],
-        inlineCreate: { fields: ['image', 'altText'] },
-        inlineEdit: { fields: ['image', 'altText'] },
-      }
+        displayMode: "cards",
+        cardFields: ["image", "altText"],
+        inlineCreate: { fields: ["image", "altText"] },
+        inlineEdit: { fields: ["image", "altText"] },
+      },
     }),
     status: select({
       options: [
@@ -38,11 +38,16 @@ export const Guitar = list({
       },
     }),
     price: integer(),
-    // TODO photo
+    user: relationship({
+      ref: "User.guitars",
+      defaultValue: ({ context }) => ({
+        connect: { id: context.session.itemId },
+      }),
+    }),
   },
   ui: {
     listView: {
-      initialColumns: ['name', 'status', 'description', 'price']
-    }
-  }
+      initialColumns: ["name", "status", "description", "price"],
+    },
+  },
 });

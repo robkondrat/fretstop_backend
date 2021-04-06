@@ -28,6 +28,13 @@ export type RoleRelateToOneInput = {
   readonly disconnectAll?: Scalars['Boolean'] | null;
 };
 
+export type GuitarRelateToManyInput = {
+  readonly create?: ReadonlyArray<GuitarCreateInput | null> | null;
+  readonly connect?: ReadonlyArray<GuitarWhereUniqueInput | null> | null;
+  readonly disconnect?: ReadonlyArray<GuitarWhereUniqueInput | null> | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
 export type UserWhereInput = {
   readonly AND?: ReadonlyArray<UserWhereInput | null> | null;
   readonly OR?: ReadonlyArray<UserWhereInput | null> | null;
@@ -80,6 +87,9 @@ export type UserWhereInput = {
   readonly orders_none?: OrderWhereInput | null;
   readonly role?: RoleWhereInput | null;
   readonly role_is_null?: Scalars['Boolean'] | null;
+  readonly guitars_every?: GuitarWhereInput | null;
+  readonly guitars_some?: GuitarWhereInput | null;
+  readonly guitars_none?: GuitarWhereInput | null;
   readonly passwordResetToken_is_set?: Scalars['Boolean'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
   readonly passwordResetIssuedAt_not?: Scalars['String'] | null;
@@ -149,6 +159,8 @@ export type SortUsersBy =
   | 'orders_DESC'
   | 'role_ASC'
   | 'role_DESC'
+  | 'guitars_ASC'
+  | 'guitars_DESC'
   | 'passwordResetIssuedAt_ASC'
   | 'passwordResetIssuedAt_DESC'
   | 'passwordResetRedeemedAt_ASC'
@@ -165,6 +177,7 @@ export type UserUpdateInput = {
   readonly cart?: CartItemRelateToManyInput | null;
   readonly orders?: OrderRelateToManyInput | null;
   readonly role?: RoleRelateToOneInput | null;
+  readonly guitars?: GuitarRelateToManyInput | null;
   readonly passwordResetToken?: Scalars['String'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
   readonly passwordResetRedeemedAt?: Scalars['String'] | null;
@@ -185,6 +198,7 @@ export type UserCreateInput = {
   readonly cart?: CartItemRelateToManyInput | null;
   readonly orders?: OrderRelateToManyInput | null;
   readonly role?: RoleRelateToOneInput | null;
+  readonly guitars?: GuitarRelateToManyInput | null;
   readonly passwordResetToken?: Scalars['String'] | null;
   readonly passwordResetIssuedAt?: Scalars['String'] | null;
   readonly passwordResetRedeemedAt?: Scalars['String'] | null;
@@ -201,6 +215,13 @@ export type GuitarImageRelateToOneInput = {
   readonly create?: GuitarImageCreateInput | null;
   readonly connect?: GuitarImageWhereUniqueInput | null;
   readonly disconnect?: GuitarImageWhereUniqueInput | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
+export type UserRelateToOneInput = {
+  readonly create?: UserCreateInput | null;
+  readonly connect?: UserWhereUniqueInput | null;
+  readonly disconnect?: UserWhereUniqueInput | null;
   readonly disconnectAll?: Scalars['Boolean'] | null;
 };
 
@@ -275,6 +296,8 @@ export type GuitarWhereInput = {
   readonly price_gte?: Scalars['Int'] | null;
   readonly price_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly price_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly user?: UserWhereInput | null;
+  readonly user_is_null?: Scalars['Boolean'] | null;
 };
 
 export type GuitarWhereUniqueInput = {
@@ -293,7 +316,9 @@ export type SortGuitarsBy =
   | 'status_ASC'
   | 'status_DESC'
   | 'price_ASC'
-  | 'price_DESC';
+  | 'price_DESC'
+  | 'user_ASC'
+  | 'user_DESC';
 
 export type GuitarUpdateInput = {
   readonly name?: Scalars['String'] | null;
@@ -301,6 +326,7 @@ export type GuitarUpdateInput = {
   readonly photo?: GuitarImageRelateToOneInput | null;
   readonly status?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
+  readonly user?: UserRelateToOneInput | null;
 };
 
 export type GuitarsUpdateInput = {
@@ -314,6 +340,7 @@ export type GuitarCreateInput = {
   readonly photo?: GuitarImageRelateToOneInput | null;
   readonly status?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
+  readonly user?: UserRelateToOneInput | null;
 };
 
 export type GuitarsCreateInput = {
@@ -423,13 +450,6 @@ export type GuitarImageCreateInput = {
 
 export type GuitarImagesCreateInput = {
   readonly data?: GuitarImageCreateInput | null;
-};
-
-export type UserRelateToOneInput = {
-  readonly create?: UserCreateInput | null;
-  readonly connect?: UserWhereUniqueInput | null;
-  readonly disconnect?: UserWhereUniqueInput | null;
-  readonly disconnectAll?: Scalars['Boolean'] | null;
 };
 
 export type CartItemWhereInput = {
@@ -725,8 +745,8 @@ export type RoleWhereInput = {
   readonly name_not_ends_with_i?: Scalars['String'] | null;
   readonly name_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly name_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
-  readonly canManageProducts?: Scalars['Boolean'] | null;
-  readonly canManageProducts_not?: Scalars['Boolean'] | null;
+  readonly canManageGuitars?: Scalars['Boolean'] | null;
+  readonly canManageGuitars_not?: Scalars['Boolean'] | null;
   readonly canSeeOtherUsers?: Scalars['Boolean'] | null;
   readonly canSeeOtherUsers_not?: Scalars['Boolean'] | null;
   readonly canManageUsers?: Scalars['Boolean'] | null;
@@ -751,8 +771,8 @@ export type SortRolesBy =
   | 'id_DESC'
   | 'name_ASC'
   | 'name_DESC'
-  | 'canManageProducts_ASC'
-  | 'canManageProducts_DESC'
+  | 'canManageGuitars_ASC'
+  | 'canManageGuitars_DESC'
   | 'canSeeOtherUsers_ASC'
   | 'canSeeOtherUsers_DESC'
   | 'canManageUsers_ASC'
@@ -768,7 +788,7 @@ export type SortRolesBy =
 
 export type RoleUpdateInput = {
   readonly name?: Scalars['String'] | null;
-  readonly canManageProducts?: Scalars['Boolean'] | null;
+  readonly canManageGuitars?: Scalars['Boolean'] | null;
   readonly canSeeOtherUsers?: Scalars['Boolean'] | null;
   readonly canManageUsers?: Scalars['Boolean'] | null;
   readonly canManageRoles?: Scalars['Boolean'] | null;
@@ -784,7 +804,7 @@ export type RolesUpdateInput = {
 
 export type RoleCreateInput = {
   readonly name?: Scalars['String'] | null;
-  readonly canManageProducts?: Scalars['Boolean'] | null;
+  readonly canManageGuitars?: Scalars['Boolean'] | null;
   readonly canSeeOtherUsers?: Scalars['Boolean'] | null;
   readonly canManageUsers?: Scalars['Boolean'] | null;
   readonly canManageRoles?: Scalars['Boolean'] | null;
@@ -853,6 +873,7 @@ export type UserListTypeInfo = {
     | 'cart'
     | 'orders'
     | 'role'
+    | 'guitars'
     | 'passwordResetToken'
     | 'passwordResetIssuedAt'
     | 'passwordResetRedeemedAt'
@@ -867,6 +888,7 @@ export type UserListTypeInfo = {
     readonly cart?: string | null;
     readonly orders?: string | null;
     readonly role?: string | null;
+    readonly guitars?: string | null;
     readonly passwordResetToken?: string | null;
     readonly passwordResetIssuedAt?: Date | null;
     readonly passwordResetRedeemedAt?: Date | null;
@@ -901,7 +923,7 @@ export type UserListFn = (
 
 export type GuitarListTypeInfo = {
   key: 'Guitar';
-  fields: 'id' | 'name' | 'description' | 'photo' | 'status' | 'price';
+  fields: 'id' | 'name' | 'description' | 'photo' | 'status' | 'price' | 'user';
   backing: {
     readonly id: string;
     readonly name?: string | null;
@@ -909,6 +931,7 @@ export type GuitarListTypeInfo = {
     readonly photo?: string | null;
     readonly status?: string | null;
     readonly price?: number | null;
+    readonly user?: string | null;
   };
   inputs: {
     where: GuitarWhereInput;
@@ -1087,7 +1110,7 @@ export type RoleListTypeInfo = {
   fields:
     | 'id'
     | 'name'
-    | 'canManageProducts'
+    | 'canManageGuitars'
     | 'canSeeOtherUsers'
     | 'canManageUsers'
     | 'canManageRoles'
@@ -1097,7 +1120,7 @@ export type RoleListTypeInfo = {
   backing: {
     readonly id: string;
     readonly name?: string | null;
-    readonly canManageProducts?: boolean | null;
+    readonly canManageGuitars?: boolean | null;
     readonly canSeeOtherUsers?: boolean | null;
     readonly canManageUsers?: boolean | null;
     readonly canManageRoles?: boolean | null;
