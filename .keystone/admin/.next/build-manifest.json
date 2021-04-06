@@ -24,10 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/guitars": [
+    "/order-items": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/guitars.js"
+      "static/chunks/pages/order-items.js"
+    ],
+    "/orders": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/orders.js"
     ]
   },
   "ampFirstPages": []
