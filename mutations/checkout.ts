@@ -79,7 +79,7 @@ export default async function checkout(
       name: cartItem.guitar.name,
       description: cartItem.guitar.description,
       price: cartItem.guitar.price,
-      quantity: cartItem.guitar.quantity,
+      quantity: cartItem.quantity,
       photo: { connect: { id: cartItem.guitar.photo.id } },
     };
     return orderItem;
@@ -94,7 +94,7 @@ export default async function checkout(
     },
   });
   // 6. clean up any old cart items
-  const cartItemIds = cartItems.map(cartItem => cartItem.id);
+  const cartItemIds = user.cart.map(cartItem => cartItem.id);
   await context.lists.CartItem.deleteMany({
     ids: cartItemIds
   });
