@@ -6,4 +6,6 @@ I made this application after completing [Wes Bos's Advanced React](https://adva
 
 I chose to build a similar application to what is shown in the tutorial to practice using this tech stack, with some differences in the style, schema, and user flow. Future releases will include a better sign in / login flow, design adjustments, and visibility of certain features based on logged in state. 
 
-Enjoy the application and any feedback is welcomed!
+[FretStop Frontend](https://github.com/robkondrat/fretstop_frontend)
+
+Enjoy the application and any feedback is welcomed! Also, check out my [personal site](http://robkondrat.com/) for other projects and ways to contact me.
